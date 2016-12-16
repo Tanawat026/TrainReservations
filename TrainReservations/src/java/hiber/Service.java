@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class Service extends HttpServlet {
+<<<<<<< HEAD
 
     public List searchTrainTravel(String search_ticketfrom, String search_ticketto) {
         String message = null;
@@ -32,6 +33,21 @@ public class Service extends HttpServlet {
             
           }
         } catch (Exception e) {
+=======
+    
+    public boolean getAuthentication(String username, String password){
+        Session session = null;
+        Transaction tx = null;
+        Passenger passenger = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Passenger where username = '"+username+"' and password = '"+password+"'");
+            passenger = (Passenger) query.list();      
+            tx.commit();
+        }catch (Exception e) {
+>>>>>>> 393532fb35272b84d7dda27f75f458af77b7cb65
             if (tx != null) {
                 tx.rollback();
             }
@@ -39,13 +55,21 @@ public class Service extends HttpServlet {
         } finally {
             session.close();
         }
+<<<<<<< HEAD
         return searchtrainList;
     }
 
+=======
+        
+        return (passenger == null)? false : true;
+    }
+    
+>>>>>>> 393532fb35272b84d7dda27f75f458af77b7cb65
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+<<<<<<< HEAD
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -56,6 +80,9 @@ public class Service extends HttpServlet {
             out.println("<h1>Servlet Service at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+=======
+            
+>>>>>>> 393532fb35272b84d7dda27f75f458af77b7cb65
         }
     }
 
