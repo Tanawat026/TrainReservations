@@ -5,7 +5,6 @@
 --%>
 <%@page import="java.util.List"%>
 <%@page import="hiber.Train"%>
-<%@page import="hiber.TrainDetail"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,7 +43,6 @@
                 try {
                     // Create a session object if it is already not  created.
                     List<Train> trainSearchList = (List<Train>) session.getAttribute("searchResult");
-                    //List<TrainDetail> trainSearchList2 = (List<TrainDetail>) session.getAttribute("searchResult");
                     if (trainSearchList != null) {
             %>
             <table border="1"> <% //border="1" %>
@@ -57,7 +55,6 @@
                          <td>เวลาออก</td> 
                          <td>เวลาถึง</td>
                          <td>จำนวนที่นั่งว่าง</td>
-                         <td>จอง</td>
                     </tr>
                     <% for (Train acc : trainSearchList){%> 
                     <tr>
@@ -68,7 +65,6 @@
                          <td><% out.println(acc.getDepartureTime()); %></td>
                          <td><% out.println(acc.getArrivalTime() ); %></td>
                         <td><% //out.println(acc.getAvailableSeat()); %></td>
-                        <td>จอง</td>
                     </tr>
                     <%}%>
                 </tbody>

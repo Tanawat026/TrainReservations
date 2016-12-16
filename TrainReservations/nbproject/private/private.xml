@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/TrainReservations/src/java/hibernate.reveng.xml</file>
-            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/TrainReservations/src/java/hiber/HibernateUtil.java</file>
-            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/TrainReservations/src/java/hiber/Service.java</file>
-            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/TrainReservations/web/Home.jsp</file>
-            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/TrainReservations/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/Git/TrainReservations/TrainReservations/src/java/train/TrainSearchController.java</file>
+            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/Git/TrainReservations/TrainReservations/web/TrainSearchResult.jsp</file>
+            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/Git/TrainReservations/TrainReservations/web/Home.jsp</file>
+            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/Git/TrainReservations/TrainReservations/src/java/hiber/Train.java</file>
+            <file>file:/C:/Users/Filmm/Documents/NetBeansProjects/Git/TrainReservations/TrainReservations/src/java/hiber/Service.java</file>
         </group>
     </open-files>
 </project-private>

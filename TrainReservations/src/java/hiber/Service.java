@@ -1,19 +1,47 @@
-
 package hiber;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class Service extends HttpServlet {
-    
-    
-    
-    
-    
+
+    public List searchTrainTravel(String search_ticketfrom, String search_ticketto) {
+        String message = null;
+        Session session = null;
+        Transaction tx = null;
+        List searchtrainList = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Train as train where  train.fromLocation = '" + search_ticketfrom + "' and train.toLocation = '" + search_ticketto + "'");
+            
+           // Query query2 = session.createQuery("from Train as train,TrainDetail as trainde where train.trainTravelId = trainde.trainTravelId"
+             //       + " and train.fromLocation = '%" + search_ticketfrom + "%'and train.toLocation = '%" + search_ticketto + "%' ");
+            searchtrainList = (List<Train>) query.list();
+          for(int i =0;i<=searchtrainList.size();i++){
+            System.out.print(searchtrainList.get(i)+"******************************************");
+            
+          }
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return searchtrainList;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -22,7 +50,7 @@ public class Service extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Service</title>");            
+            out.println("<title>Servlet Service</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Service at " + request.getContextPath() + "</h1>");
