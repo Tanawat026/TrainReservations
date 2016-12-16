@@ -12,8 +12,30 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class Service extends HttpServlet {
-<<<<<<< HEAD
+    public boolean getAuthentication(String username, String password){
+        Session session = null;
+        Transaction tx = null;
+        Passenger passenger = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Passenger where username = '"+username+"' and password = '"+password+"'");
+            passenger = (Passenger) query.list();      
+            tx.commit();
+        }catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
 
+  
+        return (passenger == null)? false : true;
+    }
+    
     public List searchTrainTravel(String search_ticketfrom, String search_ticketto) {
         String message = null;
         Session session = null;
@@ -28,48 +50,19 @@ public class Service extends HttpServlet {
            // Query query2 = session.createQuery("from Train as train,TrainDetail as trainde where train.trainTravelId = trainde.trainTravelId"
              //       + " and train.fromLocation = '%" + search_ticketfrom + "%'and train.toLocation = '%" + search_ticketto + "%' ");
             searchtrainList = (List<Train>) query.list();
-          for(int i =0;i<=searchtrainList.size();i++){
-            System.out.print(searchtrainList.get(i)+"******************************************");
-            
-          }
+
         } catch (Exception e) {
-=======
-    
-    public boolean getAuthentication(String username, String password){
-        Session session = null;
-        Transaction tx = null;
-        Passenger passenger = null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("from Passenger where username = '"+username+"' and password = '"+password+"'");
-            passenger = (Passenger) query.list();      
-            tx.commit();
-        }catch (Exception e) {
->>>>>>> 393532fb35272b84d7dda27f75f458af77b7cb65
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
+        e.printStackTrace();
         } finally {
             session.close();
         }
-<<<<<<< HEAD
-        return searchtrainList;
+      return searchtrainList;
     }
-
-=======
-        
-        return (passenger == null)? false : true;
-    }
-    
->>>>>>> 393532fb35272b84d7dda27f75f458af77b7cb65
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-<<<<<<< HEAD
+
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -80,9 +73,7 @@ public class Service extends HttpServlet {
             out.println("<h1>Servlet Service at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-=======
-            
->>>>>>> 393532fb35272b84d7dda27f75f458af77b7cb65
+
         }
     }
 
