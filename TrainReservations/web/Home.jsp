@@ -23,7 +23,7 @@
             <option value="3">Krabi</option>
             <option value="4">Trang</option>
             <option value="5">Ranong</option>
-            <option value="5">Chumporn</option>
+            <option value="6">Chumporn</option>
         </select>
         สถานีปลายทาง
         <select>
@@ -33,11 +33,16 @@
             <option value="3">Krabi</option>
             <option value="4">Trang</option>
             <option value="5">Ranong</option>
-            <option value="5">Chumporn</option>
+            <option value="6">Chumporn</option>
         </select>
-        วันออกเดินทาง
-        
         จำนวนผู้โดยสาร
+           <option selected disabled>เลือกจำนวน</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
     </center>
     </body>
 </html>
