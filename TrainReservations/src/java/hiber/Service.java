@@ -1,4 +1,3 @@
-
 package hiber;
 
 import java.io.IOException;
@@ -13,8 +12,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class Service extends HttpServlet {
+<<<<<<< HEAD
     
     public List getAuthentication(String username, String password){
+=======
         Session session = null;
         Transaction tx = null;
         List passenger = null;
@@ -37,11 +38,44 @@ public class Service extends HttpServlet {
         return passenger;
     }
     
+    public List searchTrainTravel(String search_ticketfrom, String search_ticketto) {
+        String message = null;
+        Session session = null;
+        Transaction tx = null;
+        List searchtrainList = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Train as train where  train.fromLocation = '" + search_ticketfrom + "' and train.toLocation = '" + search_ticketto + "'");
+            
+           // Query query2 = session.createQuery("from Train as train,TrainDetail as trainde where train.trainTravelId = trainde.trainTravelId"
+             //       + " and train.fromLocation = '%" + search_ticketfrom + "%'and train.toLocation = '%" + search_ticketto + "%' ");
+            searchtrainList = (List<Train>) query.list();
+
+        } catch (Exception e) {
+        e.printStackTrace();
+        } finally {
+            session.close();
+        }
+      return searchtrainList;
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Service</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Service at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+
         }
     }
 

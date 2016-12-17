@@ -21,6 +21,10 @@
         <servlet-name>Service</servlet-name>
         <servlet-class>hiber.Service</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TrainSearchController</servlet-name>
+        <servlet-class>train.TrainSearchController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -36,6 +40,10 @@
     <servlet-mapping>
         <servlet-name>Service</servlet-name>
         <url-pattern>/Service</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TrainSearchController</servlet-name>
+        <url-pattern>/TrainSearchController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
