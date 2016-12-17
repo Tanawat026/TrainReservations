@@ -5,7 +5,6 @@
  */
 package ticket;
 
-import hiber.Carddetail;
 import hiber.Service;
 import hiber.Ticketinfo;
 import java.io.IOException;
@@ -16,13 +15,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import hiber.Passenger;
 import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author Filmm
  */
-public class PaymentController extends HttpServlet {
+public class TicketUpdateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,23 +36,13 @@ public class PaymentController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-               HttpSession session = request.getSession(true);
-            /* TODO output your page here. You may use following sample code. */
-            String cardname = request.getParameter("cardname");
-            String cardnumber= request.getParameter("cardnumber");
-            String empmonth= request.getParameter("empmonth");
-            String empyear= request.getParameter("empyear");
-            Service service = new Service();
-             List psg = (List) session.getAttribute("resultPsg");
-                Passenger passenger = null;
-                for (Object l : psg) {
-                    passenger = (Passenger) l;
-                }
-                int psgId = passenger.getPsgId();
-                    boolean saved = service.insertCarddetail(new Carddetail(psgId,cardnumber,cardname,empmonth,empyear));
-                    out.println(saved);
-                    RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
-                        rd.forward(request, response);
+        HttpSession session = request.getSession(true);
+        int ticketid = Integer.parseInt(request.getParameter("taickId"));
+        String status = "Seccess";
+         Service service = new Service();
+         service.TicketUpdate(ticketid,status);
+         RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
+            rd.forward(request, response);
         }
     }
 

@@ -119,6 +119,24 @@ public class Service extends HttpServlet {
         return success;
     }
     
+    public boolean insertCarddetail(Carddetail carddetail) {
+        boolean success = false;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            session.save(carddetail);
+            tx.commit();
+            success = true;
+        } catch (Exception e) {
+            success = false;
+        } finally {
+            session.close();
+        }
+        return success;
+    }
+    
     public List searchTrainTravel(String search_ticketfrom, String search_ticketto) {
         String message = null;
         Session session = null;
@@ -143,7 +161,29 @@ public class Service extends HttpServlet {
         }
         return searchtrainList;
     }
+ 
+    public void TicketUpdate(int trainid, String status) {
+        String message = null;
+        Session session = null;
+        Transaction tx = null;
+        List ticketUpdate = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
 
+            Query query2 = session.createQuery("update  Ticketinfo set  status = :Status where TicketId = :ticketId");
+            query2.setParameter("Status", status);
+            query2.setParameter("ticketId", trainid);
+            //earchtrainList = query2.list();
+            int result = query2.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

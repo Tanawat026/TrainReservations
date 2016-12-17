@@ -29,6 +29,10 @@
         <servlet-name>PaymentController</servlet-name>
         <servlet-class>ticket.PaymentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TicketUpdateController</servlet-name>
+        <servlet-class>ticket.TicketUpdateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -52,6 +56,10 @@
     <servlet-mapping>
         <servlet-name>PaymentController</servlet-name>
         <url-pattern>/PaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TicketUpdateController</servlet-name>
+        <url-pattern>/TicketUpdateController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

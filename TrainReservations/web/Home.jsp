@@ -11,10 +11,23 @@ Author : Filmm
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="theme.css" rel="stylesheet">
+        <script src="assets/js/ie-emulation-modes-warning.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Train Reservations</title>
     </head>
     <body><center>
+       <nav class="navbar navbar-inverse"> 
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+           <li> <a   href="Home.jsp">Home</a> </li>
+           <li>   <a  href="AddCreditCard.jsp">Payment</a> </li>
+      </ul>
+           </div>
+       </nav>    
         <h1>Phuket Trains</h1>
         จองตั๋วรถไฟ <br><br>
         (คุณสามารถขึ้นที่สถานีใดก็ได้ภายในจังหวัดนั้น) <br><br>
@@ -47,7 +60,7 @@ Author : Filmm
                 List<Object[]> trainSearchList = (List<Object[]>) session.getAttribute("searchResult");
                 List psg = (List) session.getAttribute("resultPsg");
                 Passenger passenger = null;
-                for(Object l : psg){
+                for (Object l : psg) {
                     passenger = (Passenger) l;
                 }
                 if (trainSearchList != null) {
@@ -65,30 +78,30 @@ Author : Filmm
                     <td>ราคา(บาท)</td>
                     <td>จอง</td>
                 </tr>
-                <form name = "ReservationsTicket" action="TicketAddController" method="GET">
+            <form name = "ReservationsTicket" action="TicketAddController" method="GET">
                 <% 
-                    
+
                     for (Object[] obj : trainSearchList) {
                         Train train = (Train) obj[0];
                         TrainDetail traindetail = (TrainDetail) obj[1];
                 %> 
-               
+
                 <tr>
-                      <input type="text" name="psgId" value ="<%= passenger.getPsgId() %>" hidden>
-                    <input type="text" name="trainid" value ="<%= traindetail.getTrainTravelId() %>" hidden>
-                    <input type="text" name="trainTravelId" value ="<%= traindetail.getTrainTravelId() %>" hidden>
-                    <td ><input type = "text" name = "trainname" value="<% out.println(train.getTrainname()); %>" readonly</td>
-                    <td><input type = "text" name = "fromlocation" value="<% out.println(train.getFromLocation()); %>" readonly</td>
-                    <td><input type = "text" name = "tolocation" value="<% out.println(train.getToLocation()); %>" readonly</td>
-                    <td><input type = "text" name = "departuredate" value="<% out.println(traindetail.getDepartureDate()); %>" readonly</td>
-                    <td><input type = "text" name = "departuretime" value="<% out.println(train.getDepartureTime()); %>" readonly</td>
-                    <td><input type = "text" name = "arrivaltime" value="<% out.println(train.getArrivalTime()); %>" readonly</td>
-                    <td><input type = "text" name = "availableseat" value="<% out.println(traindetail.getAvailableSeat()); %>" readonly</td>
-                    <td><input type = "text" name = "price" value="<% out.println(traindetail.getPrice()); %>" readonly</td>
-                    <td><input type ="submit" name ="submit" value = "จองตั๋วโดยสาร"></td>
+                <input type="text" name="psgId" value ="<%= passenger.getPsgId()%>" hidden>
+                <input type="text" name="trainid" value ="<%= traindetail.getTrainTravelId()%>" hidden>
+                <input type="text" name="trainTravelId" value ="<%= traindetail.getTrainTravelId()%>" hidden>
+                <td ><input type = "text" name = "trainname" value="<% out.println(train.getTrainname()); %>" readonly</td>
+                <td><input type = "text" name = "fromlocation" value="<% out.println(train.getFromLocation()); %>" readonly</td>
+                <td><input type = "text" name = "tolocation" value="<% out.println(train.getToLocation()); %>" readonly</td>
+                <td><input type = "text" name = "departuredate" value="<% out.println(traindetail.getDepartureDate()); %>" readonly</td>
+                <td><input type = "text" name = "departuretime" value="<% out.println(train.getDepartureTime()); %>" readonly</td>
+                <td><input type = "text" name = "arrivaltime" value="<% out.println(train.getArrivalTime()); %>" readonly</td>
+                <td><input type = "text" name = "availableseat" value="<% out.println(traindetail.getAvailableSeat()); %>" readonly</td>
+                <td><input type = "text" name = "price" value="<% out.println(traindetail.getPrice()); %>" readonly</td>
+                <td><input type ="submit" name ="submit" value = "จองตั๋วโดยสาร"></td>
                 </tr>
-               </form>
-                <%}%>
+            </form>
+            <%}%>
             </tbody>
         </table>
         <% }
