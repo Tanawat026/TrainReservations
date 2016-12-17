@@ -20,7 +20,7 @@
         <form class="form-inline" method="POST" action="LoginController">
             <div class="form-group">
                 <label class="sr-only">Email address</label>
-                <input type="email" class="form-control" name="username" placeholder="Email">
+                <input type="text" class="form-control" name="username" placeholder="Email">
             </div>
             <div class="form-group">
                 <label class="sr-only">Password</label>

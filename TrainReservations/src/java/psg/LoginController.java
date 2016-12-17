@@ -23,12 +23,11 @@ public class LoginController extends HttpServlet {
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            out.println(username);
-            out.println(password);
+            out.println("from Passenger where username = '"+username+"' and password = '"+password+"'");
             Service service = new Service();
-            boolean found = service.getAuthentication(username, password);
-            out.println("E hee "+found);
-            if (found) {
+            boolean found = !(service.getAuthentication(username, password).isEmpty());
+            out.println(found);
+           if (found) {
                 RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
                 rd.forward(request, response);
             } else {

@@ -14,16 +14,16 @@ import org.hibernate.Transaction;
 
 public class Service extends HttpServlet {
     
-    public boolean getAuthentication(String username, String password){
+    public List getAuthentication(String username, String password){
         Session session = null;
         Transaction tx = null;
-        Passenger passenger = null;
+        List passenger = null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.getTransaction();
             tx.begin();
             Query query = session.createQuery("from Passenger where username = '"+username+"' and password = '"+password+"'");
-            passenger = (Passenger) query.list();      
+            passenger = query.list();      
             tx.commit();
         }catch (Exception e) {
             if (tx != null) {
@@ -34,7 +34,7 @@ public class Service extends HttpServlet {
             session.close();
         }
         
-        return (passenger == null)? false : true;
+        return passenger;
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
