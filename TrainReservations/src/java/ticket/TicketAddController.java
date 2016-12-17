@@ -5,6 +5,8 @@
  */
 package ticket;
 
+import hiber.Passenger;
+import hiber.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import hiber.Ticketinfo;
+import javax.servlet.RequestDispatcher;
 /**
  *
  * @author Filmm
@@ -31,16 +34,27 @@ public class TicketAddController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TicketAddController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TicketAddController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+                    int trainid = Integer.parseInt(request.getParameter("trainid"));
+                    int psgId = Integer.parseInt(request.getParameter("psgId"));
+                    //String trainname = request.getParameter("trainname");
+                    String fromlocation = request.getParameter("fromlocation");
+                    String tolocation = request.getParameter("tolocation");
+                    String departureDate = request.getParameter("departuredate");
+                    int trainTravelId = Integer.parseInt(request.getParameter("trainTravelId"));
+                   // String departuretime = request.getParameter("departuretime");
+                   // String arrivaltime = request.getParameter("arrivaltime");
+                    //String availableseat = request.getParameter("availableseat");
+                    int price = Integer.parseInt(request.getParameter("price"));
+                    //System.out.println(trainid+"---------------"+psgId+"----------"+fromlocation+"------------"+tolocation+"---------");
+                    String status = "Waitting ..";
+                    int psgQuantity = 1;
+                    Service service = new Service();
+                    int ticketId = service.getAllTicketinfo()+1;
+                    Ticketinfo ticketinfo = new Ticketinfo(ticketId,psgId,trainTravelId,departureDate, status,psgQuantity, price);
+                    boolean saved = service.insertTicketInfo(ticketinfo);
+                    out.println(saved);
+                    RequestDispatcher rd = request.getRequestDispatcher("psgFirstPage.jsp");
+                        rd.forward(request, response);
         }
     }
 

@@ -58,14 +58,14 @@ public class RegisterController extends HttpServlet {
                     Passenger passenger = new Passenger(id, username, password, firstname, lastname, null, telephone, username);
                     boolean saved = service.insertPassenger(passenger);
                     out.println(saved);
-                    /*
+                    
                     if (saved) {
                         RequestDispatcher rd = request.getRequestDispatcher("psgFirstPage.jsp?save=yes");
                         rd.forward(request, response);
                     } else {
                         RequestDispatcher rd = request.getRequestDispatcher("psgFirstPage.jsp?save=no");
                         rd.forward(request, response);
-                    }*/
+                    }
                 }
             } else {
                 RequestDispatcher rd = request.getRequestDispatcher("psgFirstPage.jsp?data=gqaeky53vg");

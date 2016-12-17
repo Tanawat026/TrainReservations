@@ -31,8 +31,9 @@
         </form>
 
         <%
-            String message = request.getParameter("message");
-            if (message != null) {
+            try {
+                String message = request.getParameter("message");
+                if (message != null) {
         %>
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -50,39 +51,43 @@
             <input type="password" class="form-control" name="password" placeholder="Password"><br><br>
             <input type="password" class="form-control" name="repassword" placeholder="Confirm password"><br><br> 
             <input type="text" class="form-control" name="tel" placeholder="Telephone"><br><br>
-        <%
-            String check = request.getParameter("check");
-            if (check != null) {
-        %>
+            <%
+                String check = request.getParameter("check");
+                if (check != null) {
+            %>
             <span class="label label-danger">Password not match!!</span>
             <br><br>
-        <%
-            }
-        %>
-        <% 
-            String data = request.getParameter("data");
-            if(data != null){        
-        %> 
-        <span class="label label-danger">All data require!!!</span>
-        <br><br>
-        <%
-            }
-        %>
-        <% 
-            String save = request.getParameter("save");
-            if(save != null){  
-                if(save.equals("yes")){   
-        %>
+            <%
+                }
+            %>
+            <%
+                String data = request.getParameter("data");
+                if (data != null) {
+            %> 
+            <span class="label label-danger">All data require!!!</span>
+            <br><br>
+            <%
+                }
+            %>
+            <%
+                String save = request.getParameter("save");
+                if (save != null) {
+                    if (save.equals("yes")) {
+            %>
             <span class="label label-success">Now you can login</span>
             <br><br>
-        <%
-            }else{
-        %>
+            <%
+            } else {
+            %>
             <span class="label label-danger">Please try again</span>
             <br><br>
-         <%
-            }}
-        %>
+            <%
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            %>
             <button type="submit" class="btn btn-success">Register</button>
         </form>
     </body>

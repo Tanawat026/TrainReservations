@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import hiber.Ticketinfo;
 
 public class Service extends HttpServlet {
-    
-    public List getAuthentication(String username, String password){
+
+    public List getAuthentication(String username, String password) {
         Session session = null;
         Transaction tx = null;
         List passenger = null;
-        try{
+        try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("from Passenger where username = '"+username+"' and password = '"+password+"'");
-            passenger = query.list();      
+            Query query = session.createQuery("from Passenger where username = '" + username + "' and password = '" + password + "'");
+            passenger = query.list();
             tx.commit();
-        }catch (Exception e) {
+        } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
@@ -32,21 +33,22 @@ public class Service extends HttpServlet {
         } finally {
             session.close();
         }
-        
+
         return passenger;
     }
-    public int getAllPassenger(){
+
+    public int getAllPassenger() {
         Session session = null;
         Transaction tx = null;
         List passenger = null;
-        try{
+        try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.getTransaction();
             tx.begin();
             Query query = session.createQuery("from Passenger");
-            passenger = query.list();      
+            passenger = query.list();
             tx.commit();
-        }catch (Exception e) {
+        } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
@@ -54,10 +56,34 @@ public class Service extends HttpServlet {
         } finally {
             session.close();
         }
-        
+
         return passenger.size();
     }
-    public boolean insertPassenger(Passenger passenger){
+
+    public int getAllTicketinfo() {
+        Session session = null;
+        Transaction tx = null;
+        List ticketinfo = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Ticketinfo");
+            ticketinfo = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return ticketinfo.size();
+    }
+    
+    public boolean insertPassenger(Passenger passenger) {
         boolean success = false;
         Session session = null;
         try {
@@ -74,6 +100,25 @@ public class Service extends HttpServlet {
         }
         return success;
     }
+
+    public boolean insertTicketInfo(Ticketinfo ticketinfo) {
+        boolean success = false;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            session.save(ticketinfo);
+            tx.commit();
+            success = true;
+        } catch (Exception e) {
+            success = false;
+        } finally {
+            session.close();
+        }
+        return success;
+    }
+    
     public List searchTrainTravel(String search_ticketfrom, String search_ticketto) {
         String message = null;
         Session session = null;
@@ -83,19 +128,22 @@ public class Service extends HttpServlet {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("from Train as train where  train.fromLocation = '" + search_ticketfrom + "' and train.toLocation = '" + search_ticketto + "'");
-            
-           // Query query2 = session.createQuery("from Train as train,TrainDetail as trainde where train.trainTravelId = trainde.trainTravelId"
-             //       + " and train.fromLocation = '%" + search_ticketfrom + "%'and train.toLocation = '%" + search_ticketto + "%' ");
-            searchtrainList = (List<Train>) query.list();
+            //Query query = session.createQuery("from Train as train where  train.fromLocation = '" + search_ticketfrom + "' and train.toLocation = '" + search_ticketto + "'");
 
+            // Query query2 = session.createQuery("from Train as train,TrainDetail as trainde where train.trainTravelId = trainde.trainTravelId"
+            //       + " and train.fromLocation = '%" + search_ticketfrom + "%'and train.toLocation = '%" + search_ticketto + "%' ");
+            //searchtrainList = (List<Train>) query.list();
+            Query query2 = session.createQuery("from Train as train,TrainDetail as trainde where train.trainTravelId = trainde.trainTravelId"
+                    + " and train.fromLocation = '" + search_ticketfrom + "'and train.toLocation = '" + search_ticketto + "'");
+            searchtrainList = query2.list();
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
         } finally {
             session.close();
         }
-      return searchtrainList;
+        return searchtrainList;
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

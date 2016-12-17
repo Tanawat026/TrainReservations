@@ -25,6 +25,10 @@
         <servlet-name>TrainSearchController</servlet-name>
         <servlet-class>train.TrainSearchController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaymentController</servlet-name>
+        <servlet-class>ticket.PaymentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -44,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>TrainSearchController</servlet-name>
         <url-pattern>/TrainSearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentController</servlet-name>
+        <url-pattern>/PaymentController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
