@@ -27,7 +27,7 @@
                 <input type="password" name="password" class="form-control" placeholder="Password">
             </div>
 
-            <button type="submit" class="btn btn-default">Sign in</button>
+            <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
 
         <%
@@ -42,6 +42,48 @@
         <%
             }
         %>
-
+        <h1>Register</h1>
+        <form class="form-inline" method="POST" action="RegisterController">
+            <input type="text" class="form-control" name="firstname" placeholder="Firstname"> &nbsp;&nbsp;&nbsp;            
+            <input type="text" class="form-control" name="lastname" placeholder="Lastname"><br><br> 
+            <input type="email" class="form-control" name="email" placeholder="Email"><br><br>            
+            <input type="password" class="form-control" name="password" placeholder="Password"><br><br>
+            <input type="password" class="form-control" name="repassword" placeholder="Confirm password"><br><br> 
+            <input type="text" class="form-control" name="tel" placeholder="Telephone"><br><br>
+        <%
+            String check = request.getParameter("check");
+            if (check != null) {
+        %>
+            <span class="label label-danger">Password not match!!</span>
+            <br><br>
+        <%
+            }
+        %>
+        <% 
+            String data = request.getParameter("data");
+            if(data != null){        
+        %> 
+        <span class="label label-danger">All data require!!!</span>
+        <br><br>
+        <%
+            }
+        %>
+        <% 
+            String save = request.getParameter("save");
+            if(save != null){  
+                if(save.equals("yes")){   
+        %>
+            <span class="label label-success">Now you can login</span>
+            <br><br>
+        <%
+            }else{
+        %>
+            <span class="label label-danger">Please try again</span>
+            <br><br>
+         <%
+            }}
+        %>
+            <button type="submit" class="btn btn-success">Register</button>
+        </form>
     </body>
 </html>

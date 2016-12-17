@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
                 rd.forward(request, response);
             } else {
                 session.setAttribute("found", found);
-                RequestDispatcher rd = request.getRequestDispatcher("psgFirstPage.jsp?message=yes");
+                RequestDispatcher rd = request.getRequestDispatcher("psgFirstPage.jsp?message=UERnfku99fkq3");
                 rd.forward(request, response);
             }
         }

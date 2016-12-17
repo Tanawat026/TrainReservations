@@ -35,7 +35,45 @@ public class Service extends HttpServlet {
         
         return passenger;
     }
-    
+    public int getAllPassenger(){
+        Session session = null;
+        Transaction tx = null;
+        List passenger = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Passenger");
+            passenger = query.list();      
+            tx.commit();
+        }catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+        return passenger.size();
+    }
+    public boolean insertPassenger(Passenger passenger){
+        boolean success = false;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            session.save(passenger);
+            tx.commit();
+            success = true;
+        } catch (Exception e) {
+            success = false;
+        } finally {
+            session.close();
+        }
+        return success;
+    }
     public List searchTrainTravel(String search_ticketfrom, String search_ticketto) {
         String message = null;
         Session session = null;
