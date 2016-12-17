@@ -12,10 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class Service extends HttpServlet {
-<<<<<<< HEAD
     
     public List getAuthentication(String username, String password){
-=======
         Session session = null;
         Transaction tx = null;
         List passenger = null;
